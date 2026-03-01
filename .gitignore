@@ -1,0 +1,5 @@
+# Binary
+tsexpose
+
+# Tailscale state
+.tsexpose/
