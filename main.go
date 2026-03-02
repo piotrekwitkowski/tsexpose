@@ -49,6 +49,9 @@ func main() {
 		if *authKey == "" {
 			*authKey = os.Getenv("TS_AUTHKEY")
 		}
+		if *authKey == "" {
+			log.Fatal("--install requires an auth key via -auth-key or TS_AUTHKEY env (a launchd service cannot authenticate interactively)")
+		}
 		installLaunchd(*localPort, *tsPort, *hostname, *stateDir, *authKey, *ephemeral, *tsLogs)
 		return
 	}
