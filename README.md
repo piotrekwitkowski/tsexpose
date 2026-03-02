@@ -44,25 +44,22 @@ Your backend can read these headers directly — no auth middleware needed.
 
 ## Auto-Start on macOS
 
-A launchd plist is included to run tsexpose automatically at login.
-
-1. Edit `com.tsexpose.plist` — set the binary path, port, hostname, and auth key to match your setup.
-
-2. Install and start:
+tsexpose can install itself as a launchd service that starts automatically at login:
 
 ```
-cp com.tsexpose.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.tsexpose.plist
+tsexpose --install -local-port 3000 -hostname myapp
+tsexpose --install -local-port 8080 -ts-port 443 -hostname myapp -auth-key tskey-auth-XXXXX
 ```
 
-3. To stop and remove:
+This generates a plist in `~/Library/LaunchAgents/` and loads it immediately.
+
+To stop and remove:
 
 ```
-launchctl unload ~/Library/LaunchAgents/com.tsexpose.plist
-rm ~/Library/LaunchAgents/com.tsexpose.plist
+tsexpose --uninstall -hostname myapp
 ```
 
-Logs go to `/tmp/tsexpose.log`.
+Logs go to `/tmp/tsexpose-<hostname>.log`.
 
 
 ## License

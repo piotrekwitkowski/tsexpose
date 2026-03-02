@@ -26,6 +26,8 @@ func main() {
 	stateDir := flag.String("state-dir", "", "Directory to store Tailscale state (default: ~/.tsexpose/<hostname>)")
 	ephemeral := flag.Bool("ephemeral", false, "Remove node from tailnet on exit")
 	tsLogs := flag.Bool("ts-logs", false, "Enable Tailscale logging to log.tailscale.net")
+	install := flag.Bool("install", false, "Install as macOS launchd service (auto-start at login)")
+	uninstall := flag.Bool("uninstall", false, "Remove macOS launchd service")
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "tsexpose - Expose a local port on your Tailscale network using tsnet\n\n")
@@ -39,6 +41,22 @@ func main() {
 	}
 
 	flag.Parse()
+
+	if *install {
+		if *tsPort == 0 {
+			*tsPort = *localPort
+		}
+		if *authKey == "" {
+			*authKey = os.Getenv("TS_AUTHKEY")
+		}
+		installLaunchd(*localPort, *tsPort, *hostname, *stateDir, *authKey, *ephemeral, *tsLogs)
+		return
+	}
+
+	if *uninstall {
+		uninstallLaunchd(*hostname)
+		return
+	}
 
 	if !*tsLogs {
 		envknob.SetNoLogsNoSupport()
