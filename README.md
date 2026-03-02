@@ -28,6 +28,9 @@ tsexpose -local-port 5432 -hostname my-db -ephemeral
 | `-auth-key` | | Tailscale auth key (or set `TS_AUTHKEY` env) |
 | `-state-dir` | `~/.tsexpose/<hostname>` | Directory to store Tailscale state |
 | `-ephemeral` | `false` | Remove node from tailnet on exit |
+| `-ts-logs` | `false` | Enable Tailscale logging to log.tailscale.net |
+| `-install` | `false` | Install as macOS launchd service (auto-start at login) |
+| `-uninstall` | `false` | Remove macOS launchd service |
 
 ## Identity Headers
 
