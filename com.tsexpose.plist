@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.tsexpose</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/YOU/go/bin/tsexpose</string>
+        <string>-local-port</string>
+        <string>3000</string>
+        <string>-hostname</string>
+        <string>myapp</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TS_AUTHKEY</key>
+        <string>tskey-auth-XXXXX</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/tsexpose.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/tmp/tsexpose.log</string>
+</dict>
+</plist>
